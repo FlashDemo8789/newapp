@@ -1,0 +1,57 @@
+# Core data science packages with specific versions to avoid conflicts
+numpy>=1.21.0
+pandas>=1.5.0
+scikit-learn>=1.0.0
+matplotlib>=3.5.0
+statsmodels>=0.13.0
+prophet>=1.1.0
+bayesian-optimization>=1.4.0
+python-dotenv>=0.21.0
+plotly>=5.10.0
+fastapi>=0.88.0
+uvicorn>=0.20.0
+scipy>=1.9.0
+pydantic>=1.10.0
+
+# Visualization packages
+seaborn>=0.11.0
+
+# Web interface
+streamlit>=1.10.0
+streamlit-option-menu>=0.3.2
+flask>=2.0.0
+requests>=2.28.1
+aiohttp>=3.8.0  # Required for competitive_intelligence module
+watchdog>=2.1.0  # Recommended by Streamlit for better performance
+
+# PDF Processing
+PyMuPDF>=1.19.0  # imported as fitz in the code
+PyPDF2>=2.0.0    # fallback PDF processor
+tabula-py>=2.3.0  # for table extraction from PDFs
+fpdf>=1.7.2      # for PDF report generation
+reportlab>=3.6.12  # investment-grade PDF report generation
+
+# Image processing
+pillow>=9.0.0
+
+# Machine learning - avoid installing tensorflow for now
+xgboost>=1.5.0,<2.0.0
+
+# Database
+pymongo>=4.0.0
+
+# Parallel processing
+ray>=2.0.0
+
+# NLP & document analysis
+nltk>=3.6.0
+spacy>=3.2.0
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+
+# Network analysis
+networkx>=2.8.0  # Required for network effect analysis
+
+# Utilities
+tqdm>=4.62.0
+pyyaml>=6.0.0
+openai==0.28

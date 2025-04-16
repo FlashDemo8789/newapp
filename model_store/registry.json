@@ -1,0 +1,43 @@
+{
+  "models": {
+    "startup_success_predictor": {
+      "d941666e-c55c-4f34-88da-95bf5dc5aeba": {
+        "version_id": "d941666e-c55c-4f34-88da-95bf5dc5aeba",
+        "model_path": "./model_store/startup_success_predictor/d941666e-c55c-4f34-88da-95bf5dc5aeba.pkl",
+        "created_at": "2025-04-15T12:09:28.464368",
+        "metrics": {
+          "train_accuracy": 1.0,
+          "validation_accuracy": 1.0
+        },
+        "metadata": {
+          "description": "Startup success prediction model",
+          "feature_columns": [
+            "monthly_revenue",
+            "annual_recurring_revenue",
+            "lifetime_value_ltv",
+            "gross_margin_percent",
+            "operating_margin_percent",
+            "burn_rate",
+            "runway_months",
+            "cash_on_hand_million",
+            "debt_ratio",
+            "financing_round_count",
+            "monthly_active_users",
+            "stage_numeric",
+            "sector_numeric"
+          ],
+          "target": "success (1=funded, 0=passed)"
+        },
+        "is_active": true,
+        "tags": [
+          "startup",
+          "prediction",
+          "random_forest"
+        ],
+        "framework": "scikit-learn"
+      }
+    }
+  },
+  "ab_test_weights": {},
+  "last_updated": "2025-04-15T12:09:28.465175"
+}

@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  flashdna_app:
+    build: .
+    container_name: flashdna_app
+    ports:
+      - "8501:8501"
+    environment:
+      DEEPSEEK_API_KEY: "sk-4991c423c5664711a5845c05d887f31b"
+      MONGO_URI: "mongodb://flashdna_mongo:27017/flash_dna"
+    depends_on:
+      - flashdna_mongo
+    # If you want GPU for HPC-based LLM inference (like BFS–free synergy), uncomment below:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      - ./model_xgb.pkl:/app/model_xgb.pkl
+
+  flashdna_mongo:
+    image: mongo:6.0
+    container_name: flashdna_mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

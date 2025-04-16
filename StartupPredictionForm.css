@@ -1,0 +1,200 @@
+/* StartupPredictionForm.css */
+
+.startup-prediction-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.startup-prediction-container h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Server Status */
+.server-status {
+  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.status-online {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.status-offline {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.status-unknown {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+/* Form Styling */
+.prediction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+input, select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.predict-button, .simple-api-button {
+  flex: 1;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.predict-button {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.predict-button:hover:not(:disabled) {
+  background-color: #3a7bc8;
+}
+
+.simple-api-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.simple-api-button:hover:not(:disabled) {
+  background-color: #5a6268;
+}
+
+.predict-button:disabled, .simple-api-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Error Message */
+.error-message {
+  margin-top: 1.5rem;
+  padding: 0.8rem;
+  background-color: #f8d7da;
+  color: #721c24;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* Prediction Results */
+.prediction-result {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.prediction-result h3 {
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.outcome {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.outcome.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.outcome.failure {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.confidence, .probability {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: #f3f3f3;
+  border-radius: 4px;
+}
+
+.confidence span, .probability span {
+  font-weight: 500;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .startup-prediction-container {
+    padding: 1.5rem;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+} 
