@@ -1,0 +1,94 @@
+{
+  "id": "mock-analysis-001",
+  "name": "Sample Startup Analysis",
+  "description": "This is a sample startup analysis for demo purposes",
+  "industry": "Software",
+  "business_model": "SaaS",
+  "stage": "Series A",
+  "timestamp": "2025-04-16T12:00:00Z",
+  "analysis_timestamp": "2025-04-16T12:00:00Z",
+  "scores": {
+    "capital": 0.75,
+    "advantage": 0.82,
+    "market": 0.68,
+    "people": 0.77,
+    "composite": 0.76
+  },
+  "summary": {
+    "overview": "Sample startup with strong product-market fit and experienced team.",
+    "key_strengths": [
+      "Strong team with domain expertise",
+      "Growing market with low competition",
+      "Robust SaaS business model"
+    ],
+    "key_risks": [
+      "Limited runway for current operations",
+      "Potential regulatory challenges ahead",
+      "Competition from larger players"
+    ]
+  },
+  "dna": {
+    "attributes": {
+      "innovation": 0.85,
+      "execution": 0.72,
+      "scalability": 0.78,
+      "defensibility": 0.65
+    },
+    "comparisons": {
+      "industry_avg": {
+        "innovation": 0.65,
+        "execution": 0.60,
+        "scalability": 0.55,
+        "defensibility": 0.50
+      }
+    },
+    "insights": [
+      "Innovation score is 30% above industry average",
+      "Execution capabilities are solid but can be improved",
+      "Scalability architecture is well-designed"
+    ]
+  },
+  "pmf": {
+    "score": 0.82,
+    "feedback": {
+      "positive": 65,
+      "neutral": 25,
+      "negative": 10
+    },
+    "survey_highlights": [
+      "Users praise ease of use",
+      "Integration capabilities are highly valued",
+      "Some feedback about pricing concerns"
+    ],
+    "recommendations": [
+      "Consider tiered pricing strategy",
+      "Improve onboarding experience",
+      "Add requested integrations with popular tools"
+    ]
+  },
+  "cohort": {
+    "retention": {
+      "1_month": 0.92,
+      "3_month": 0.85,
+      "6_month": 0.78,
+      "12_month": 0.72
+    },
+    "revenue_growth": {
+      "expansion": 0.15,
+      "contraction": 0.05
+    }
+  },
+  "teamMoat": {
+    "score": 0.76,
+    "founder_experience": 8,
+    "team_size": 32,
+    "key_hires": 12,
+    "skill_composition": {
+      "technical": 0.45,
+      "sales": 0.20,
+      "marketing": 0.15,
+      "operations": 0.10,
+      "other": 0.10
+    }
+  }
+}

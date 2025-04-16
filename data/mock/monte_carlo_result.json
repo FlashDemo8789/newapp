@@ -1,0 +1,15 @@
+{
+  "success_probability": 0.75,
+  "median_runway_months": 18.5,
+  "expected_monthly_burn": [100000, 105000, 110000, 115000, 120000],
+  "user_projections": {
+    "months": [1, 2, 3, 4, 5, 6],
+    "p50": [5000, 6000, 7200, 8640, 10368, 12442]
+  },
+  "revenue_projections": {
+    "months": [1, 2, 3, 4, 5, 6],
+    "p50": [80000, 96000, 115200, 138240, 165888, 199066]
+  },
+  "simulation_timestamp": "2023-08-15T12:00:00.000Z",
+  "simulation_version": "3.0.0"
+} 

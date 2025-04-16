@@ -1,182 +1,64 @@
-"""
-FlashDNA Startup Analysis Platform
-Main application entry point with all tab implementations
-"""
-import streamlit as st
-import logging
-import os
-import sys
-from pathlib import Path
+from flask import Flask, jsonify
+from flask_cors import CORS
+from api import init_routes
+import json
+import numpy as np
+import pandas as pd
 
-# Setup logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger("flashdna_app")
+# Define Config class locally instead of importing
+class Config:
+    DEBUG = True
+    JSON_SORT_KEYS = False
+    SECRET_KEY = "flashdna-development-key"
 
-# Set page configuration
-st.set_page_config(
-    page_title="FlashDNA Startup Analysis",
-    page_icon="🧬",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+# Custom JSON encoder class to handle specific objects like pandas DataFrames
+class CustomJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, pd.DataFrame):
+            return obj.to_dict(orient='records')
+        elif isinstance(obj, pd.Series):
+            return obj.to_dict()
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif hasattr(obj, 'to_json'):
+            return obj.to_json()
+        elif hasattr(obj, 'to_dict'):
+            return obj.to_dict()
+        return super().default(obj)
 
-# Custom CSS for enhanced UI
-st.markdown("""
-<style>
-    /* Card styling */
-    .card {
-        padding: 1.5rem;
-        border-radius: 0.5rem;
-        background-color: white;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-        margin-bottom: 1.5rem;
-    }
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
     
-    /* Animation for components */
-    .animate-panel {
-        animation: slideFadeIn 0.5s ease-out forwards;
-        opacity: 0;
-        transform: translateY(20px);
-    }
+    # Set custom JSON encoder
+    app.json.encoder = CustomJSONEncoder
     
-    @keyframes slideFadeIn {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+    # Enable CORS for React frontend
+    CORS(app, resources={r"/*": {"origins": "*"}})
     
-    /* Sidebar styling */
-    .css-1d391kg {
-        padding-top: 2rem;
-    }
+    # Initialize routes
+    init_routes(app)
     
-    /* Tab container styling */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 1px;
-    }
+    # Error handlers
+    @app.errorhandler(404)
+    def not_found(e):
+        return jsonify({"error": "Not found", "message": str(e)}), 404
     
-    .stTabs [data-baseweb="tab"] {
-        height: 50px;
-        white-space: pre-wrap;
-        background-color: #f1f5f9;
-        border-radius: 4px 4px 0 0;
-        gap: 1px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
+    @app.errorhandler(500)
+    def server_error(e):
+        return jsonify({"error": "Server error", "message": str(e)}), 500
     
-    .stTabs [aria-selected="true"] {
-        background-color: #3A86FF;
-        color: white;
-    }
-</style>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-""", unsafe_allow_html=True)
-
-def main():
-    """Main application entry point"""
-    # Display application header
-    st.markdown("""
-    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-        <h1 style="margin: 0; flex-grow: 1;">🧬 FlashDNA Startup Analysis</h1>
-        <span style="color: #64748B; font-size: 0.8rem;">Comprehensive Startup Assessment Platform</span>
-    </div>
-    <hr style="margin-top: 0; margin-bottom: 2rem;">
-    """, unsafe_allow_html=True)
+    # Health check endpoint
+    @app.route('/health', methods=['GET'])
+    def health_check():
+        return jsonify({"status": "ok", "message": "Flash DNA Analysis API is running"})
     
-    # Load all tab implementations
-    try:
-        # Add the current directory to path to ensure modules can be found
-        sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-        
-        # Import tab loader module
-        logger.info("Initializing tab loader")
-        from tab_implementations.tab_loader import initialize_tabs
-        
-        # Initialize all tab implementations
-        tab_results = initialize_tabs()
-        
-        # Log results
-        for tab, status in tab_results.items():
-            logger.info(f"Tab '{tab}' loaded: {status}")
-        
-        # Import the main analysis flow module
-        logger.info("Importing analysis flow module")
-        import analysis_flow
-        
-        # Start the analysis flow
-        analysis_flow.main()
-        
-    except ImportError as ie:
-        st.error(f"Error importing required modules: {str(ie)}")
-        st.info("Please ensure all dependencies are installed and the directory structure is correct.")
-        logger.error(f"Import error: {str(ie)}")
-    except Exception as e:
-        st.error(f"Error initializing application: {str(e)}")
-        logger.error(f"Application error: {str(e)}", exc_info=True)
-        
-        # Provide a fallback experience
-        _render_fallback_interface()
-
-def _render_fallback_interface():
-    """Render a fallback interface if the main app fails to load"""
-    st.markdown("""
-    ## ⚠️ Application Error
-    
-    The FlashDNA application encountered an error while loading. Please try the following:
-    
-    1. Check that all required modules are installed
-    2. Verify that the application structure is intact
-    3. Ensure that the analysis_flow.py file is in the correct location
-    4. Check the logs for detailed error information
-    
-    ### Running Diagnostics
-    
-    You can run diagnostics to help identify the issue:
-    """)
-    
-    if st.button("Run Diagnostics"):
-        st.write("Checking environment...")
-        
-        # Check Python version
-        import platform
-        st.write(f"Python version: {platform.python_version()}")
-        
-        # Check directory structure
-        st.write("Checking directory structure:")
-        try:
-            base_dir = Path(__file__).parent
-            st.write(f"Base directory: {base_dir}")
-            
-            # Check key files
-            files_to_check = [
-                "analysis_flow.py",
-                "tab_implementations/tab_loader.py",
-                "benchmark_tab_implementation.py"
-            ]
-            
-            for file_path in files_to_check:
-                full_path = base_dir / file_path
-                exists = full_path.exists()
-                st.write(f"- {file_path}: {'✅ Found' if exists else '❌ Missing'}")
-                
-            # Check if modules can be imported
-            st.write("Checking module imports:")
-            modules_to_check = ["streamlit", "pandas", "numpy", "plotly"]
-            
-            for module in modules_to_check:
-                try:
-                    __import__(module)
-                    st.write(f"- {module}: ✅ Imported successfully")
-                except ImportError:
-                    st.write(f"- {module}: ❌ Import failed")
-        
-        except Exception as e:
-            st.error(f"Error during diagnostics: {str(e)}")
+    return app
 
 if __name__ == "__main__":
-    main()
+    app = create_app()
+    app.run(debug=True, host='0.0.0.0', port=5001)  # Changed to port 5001 to avoid macOS AirPlay conflict

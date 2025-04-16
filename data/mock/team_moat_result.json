@@ -1,0 +1,108 @@
+{
+  "profile": {
+    "teamSize": 12,
+    "coreTeamSize": 5,
+    "averageExperience": 8.5,
+    "priorStartups": 7,
+    "overallScore": 7.8,
+    "benchmarks": {
+      "industry": 6.2,
+      "successful": 7.5,
+      "unicorns": 8.4,
+      "competitors": 6.8
+    },
+    "competencies": [
+      {
+        "name": "Technical Expertise",
+        "score": 8.5,
+        "description": "Deep technical knowledge in core domain",
+        "benchmarks": {
+          "industry": 6.5,
+          "successful": 7.8,
+          "unicorns": 8.7,
+          "competitors": 7.0
+        }
+      },
+      {
+        "name": "Industry Experience",
+        "score": 7.2,
+        "description": "Previous roles in the target industry",
+        "benchmarks": {
+          "industry": 6.8,
+          "successful": 7.2,
+          "unicorns": 7.5,
+          "competitors": 7.5
+        }
+      }
+    ],
+    "diversity": {
+      "background": 7.5,
+      "education": 6.8,
+      "experience": 8.2,
+      "thinking": 7.6,
+      "demographics": 6.2
+    }
+  },
+  "advantage": {
+    "overallScore": 7.5,
+    "benchmarks": {
+      "industry": 5.8,
+      "successful": 7.2,
+      "unicorns": 8.6,
+      "competitors": 6.3
+    },
+    "dimensions": [
+      {
+        "name": "Domain Expertise",
+        "score": 8.3,
+        "description": "Specialized knowledge in core domain",
+        "benchmarks": {
+          "industry": 6.2,
+          "successful": 7.5,
+          "unicorns": 8.7,
+          "competitors": 6.5
+        }
+      }
+    ]
+  },
+  "execution": {
+    "metrics": {
+      "efficiency": [
+        {
+          "name": "Time to Market",
+          "value": 8.2,
+          "benchmark": {
+            "industry": 6.5,
+            "successful": 7.8,
+            "unicorns": 8.5,
+            "competitors": 6.8
+          }
+        }
+      ]
+    }
+  },
+  "adaptability": {
+    "overallScore": 7.2,
+    "benchmarks": {
+      "industry": 5.5,
+      "successful": 7.0,
+      "unicorns": 8.5,
+      "competitors": 6.0
+    },
+    "dimensions": [
+      {
+        "name": "Learning Agility",
+        "score": 8.0,
+        "description": "Ability to quickly acquire new knowledge",
+        "benchmarks": {
+          "industry": 5.8,
+          "successful": 7.2,
+          "unicorns": 8.5,
+          "competitors": 6.2
+        },
+        "trend": 1
+      }
+    ]
+  },
+  "timestamp": "2023-08-15T12:00:00.000Z"
+} 
